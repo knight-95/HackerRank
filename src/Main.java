@@ -7,16 +7,23 @@ public class Main {
     public static void main(String[] args) {
 //        System.out.println(longestEven("hey"));
         int[] nums = {31,15,7,3,2};
-        List <Integer> list = new ArrayList<Integer>();
-        list.add(31);
-        list.add(15);
-        list.add(7);
-        list.add(3);
-        list.add(2);
+//        List <Integer> list = new ArrayList<Integer>();
+//        list.add(31);
+//        list.add(15);
+//        list.add(7);
+//        list.add(3);
+//        list.add(2);
 
 
 //        sortByBits(nums);
-        cardinalitySort(list);
+//        cardinalitySort(list);
+
+//        int arr[] = {4, 5, 6} ;
+//        int n = arr.length;
+//        System.out.println("Sum of SubArray " +
+//                SubArraySum(arr, n));
+
+        maximumIndex(2,1);
     }
     public static String longestEven(String sentence){
         String longestWord="";
@@ -53,5 +60,90 @@ public class Main {
             System.out.println(nums.get(i));
         }
         return nums;
+    }
+    //given-array-integers-find-sum-elements-subarray
+    public static long SubArraySum( int arr[] , int n )
+    {
+        long result = 0;
+
+        // computing sum of subarray using formula
+        for (int i=0; i<n; i++)
+            result += (arr[i] * (i+1) * (n-i));
+
+        // return all subarray sum
+        return result ;
+    }
+
+    public static void maximumIndex(int N, int B)
+    {
+        int max_index = 0;
+
+    // Calculate maximum possible
+    // index that can be reached
+        for (int i = 1; i <= N; i++)
+        {
+            max_index += i;
+        }
+
+        int current_index = max_index,
+                step = N;
+
+        while (true)
+        {
+            // Check if current index
+            // and step both are greater
+            // than 0 or not
+            while (current_index > 0 &&
+                    N > 0)
+            {
+                // Decrement current_index
+                // by step
+                current_index -= N;
+
+                // Check if current index
+                // is equal to B or not
+                if (current_index == B)
+                {
+                    // Restore to previous
+                    // index
+                    current_index += N;
+                }
+
+                // Decrement step by one
+                N--;
+            }
+
+            // If it reaches the 0th index
+            if (current_index <= 0)
+            {
+                // Print result
+                System.out.print(max_index + "\n");
+                break;
+            }
+
+            // If max index fails to
+            // reach the 0th index
+            else
+            {
+                N = step;
+
+                // Store max_index - 1 in
+                // current index
+                current_index = max_index - 1;
+
+                // Decrement max index
+                max_index--;
+
+                // If current index is
+                // equal to B
+                if (current_index == B)
+                {
+                    current_index = max_index - 1;
+
+                    // Decrement current index
+                    max_index--;
+                }
+            }
+        }
     }
 }
